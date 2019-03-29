@@ -55,17 +55,11 @@ void spread(int x, int y) {
 	}
 }
 
-void fire () {
-	for (int x = 0; x < COLS; x ++) {
-		for (int y = 1; y < LINES; y++) {
-			spread(x, y);
-		}
-	}
-}
-
 void draw () {
 	for (int x = 0; x < COLS; x++) {
 		for (int y = 0; y < LINES; y++) {
+			spread(x, y);
+
 			int p = pixel_ptr[y * COLS + x];
 			int c = firechars[p];
 
@@ -229,7 +223,6 @@ int main (int argc, char *argv[]) {
 			}
 		}
 
-		fire();
 		draw();
 
 		if (fade_flag) {
