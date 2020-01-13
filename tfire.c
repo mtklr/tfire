@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <ncurses.h>
+#include <signal.h>
 
 #define DELAY_MAX 100
 #define DELAY_DEF 50
