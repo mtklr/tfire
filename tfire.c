@@ -42,7 +42,8 @@ void spread(int x, int y) {
 	if (pixel_ptr[src] == 0) {
 		pixel_ptr[src - COLS] = 0;
 		/* wredrawln() may fix flickering */
-		/* wredrawln(stdscr, y, 1); */
+		/* also seems to fix stuck characters on linux console */
+		wredrawln(stdscr, y, 1);
 	} else {
 		/* static row of decreasing numbers */
 		/* pixel_ptr[src - COLS] = pixel_ptr[src] - 1; */
