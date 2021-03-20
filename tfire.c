@@ -40,11 +40,24 @@ void spread(int x, int y) {
 	int dst = src - rnd + 1;
 
 	if (pixel_ptr[src] == 0) {
-		pixel_ptr[src - COLS] = 0;
+		src -= COLS;
+
+		if (src < 0) {
+			src = 0;
+		}
+
+		pixel_ptr[src] = 0;
+
 		/* wredrawln() may fix flickering */
 		/* also seems to fix stuck characters on linux console */
 		wredrawln(stdscr, y, 1);
 	} else {
+		dst -= COLS;
+
+		if (dst < 0) {
+			dst = 0;
+		}
+
 		/* static row of decreasing numbers */
 		/* pixel_ptr[src - COLS] = pixel_ptr[src] - 1; */
 
@@ -53,7 +66,7 @@ void spread(int x, int y) {
 		/* pixel_ptr[src - COLS] = pixel_ptr[src] - (rand() & 1); */
 
 		/* as above, with left/right movement */
-		pixel_ptr[dst - COLS] = pixel_ptr[src] - (rand() & 1);
+		pixel_ptr[dst] = pixel_ptr[src] - (rand() & 1);
 	}
 }
 
